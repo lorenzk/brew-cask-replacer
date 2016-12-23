@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
+# Array of installed applications to exclude. Ex: Firefox Beta
+# exclude = ["firefox"]
+exclude = []
+
 Dir.glob('/Applications/*.app').each do |path|
   next if File.symlink?(path)
 
@@ -12,6 +16,9 @@ Dir.glob('/Applications/*.app').each do |path|
   next unless searchresult =~ /Exact match/
 
   token = searchresult.split("\n")[1]
+
+  next unless exclude.grep(/#{token}/).empty?
+
   puts "Installing #{token}..."
   begin
     FileUtils.mv(path, File.expand_path('~/.Trash/'))
