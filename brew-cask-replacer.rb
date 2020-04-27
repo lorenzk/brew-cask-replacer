@@ -10,7 +10,7 @@ Dir.glob('/Applications/*.app').each do |path|
 
   # Remove version numbers at the end of the name
   app = path.slice(14..-1).sub(/.app\z/, '').sub(/ \d*\z/, '')
-  searchresult = `brew cask search #{app}`
+  searchresult = `brew search #{app}`
   puts searchresult
 
   next unless searchresult =~ /Exact match/
