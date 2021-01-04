@@ -26,5 +26,5 @@ Dir.glob('/Applications/*.app').each do |path|
     puts "ERROR: Could not move #{path} to Trash"
     next
   end
-  puts `brew install --cask #{token} --appdir=/Applications`
+  puts `brew install --cask #{token} $(echo $HOMEBREW_CASK_OPTS)`
 end
